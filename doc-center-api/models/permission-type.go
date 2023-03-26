@@ -1,6 +1,6 @@
 package models
 
-type TipoPermissao struct {
-	Id        int64  `json:"id"`
-	Descricao string `json:"descricao"`
+type PermissionType struct {
+	Id          int64  `json:"id" gorm:"primaryKey"`
+	Description string `json:"description"`
 }
