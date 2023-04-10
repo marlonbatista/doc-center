@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"doc-center-api/models"
+	"doc-center-api/domain/models"
 	"errors"
 	"fmt"
 	"time"
