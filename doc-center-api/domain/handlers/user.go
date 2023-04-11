@@ -43,8 +43,3 @@ func UpdateUser(user *models.User, id string) (err error) {
 	database.DB.Save(user)
 	return nil
 }
-
-func DeleteUser(user *models.User, id string) (err error) {
-	database.DB.Where("id = ?", id).Delete(user)
-	return nil
-}
