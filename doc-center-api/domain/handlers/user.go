@@ -25,6 +25,7 @@ func GetAllUsers(user *[]models.User) (err error) {
 
 func CreateUser(user *models.User) (err error) {
 	user.Password = services.SHA256Encoder(user.Password)
+	services.HashPassword(user)
 	if err = database.DB.Create(user).Error; err != nil {
 		return err
 	}

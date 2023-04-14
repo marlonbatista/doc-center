@@ -60,5 +60,5 @@ func UpdateUser(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-
+	
 }
