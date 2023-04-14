@@ -24,7 +24,7 @@ func GetAllUsers(user *[]models.User) (err error) {
 }
 
 func CreateUser(user *models.User) (err error) {
-	user.Senha = services.SHA256Encoder(user.Senha)
+	services.HashPassword(user)
 	if err = database.DB.Create(user).Error; err != nil {
 		return err
 	}
@@ -41,10 +41,5 @@ func GetUserByID(user *models.User, id string) (err error) {
 func UpdateUser(user *models.User, id string) (err error) {
 	fmt.Print(user)
 	database.DB.Save(user)
-	return nil
-}
-
-func DeleteUser(user *models.User, id string) (err error) {
-	database.DB.Where("id = ?", id).Delete(user)
 	return nil
 }
