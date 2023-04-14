@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"doc-center-api/api/auth"
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
 	"fmt"
@@ -60,5 +61,43 @@ func UpdateUser(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
+}
+
 	
+	authService := auth.AuthService{}
+
+	var loginData struct {
+		Username string `json:"Email" binding:"required"`
+		Password string `json:"Password" binding:"required"`
+	}
+
+	if erro := c.ShouldBindJSON(&loginData); erro != nil {
+
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": erro.Error(),
+		})
+		return
+	}
+
+	tokenString, erro := authService.CreateToken(loginData.Username, loginData.Password)
+
+	if erro != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": erro.Error(),
+		})
+		return
+	}
+
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    tokenString,
+		HttpOnly: true,
+		Secure:   true,
+		Path:     "/",
+	}
+
+	http.SetCookie(c.Writer, &cookie)
+
+	http.SetCookie(c.Writer, &cookie)
+
 }
