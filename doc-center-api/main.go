@@ -25,7 +25,8 @@ func main() {
 	}
 
 	defer database.CloseConn()
-	database.DB.AutoMigrate(&models.User{})
+	database.DB.AutoMigrate(&models.PermissionType{}, &models.Permission{}, &models.User{},
+		&models.Dependent{}, &models.File{})
 
 	router := routers.ConfigRotas()
 

@@ -32,7 +32,7 @@ func CreateUser(c *gin.Context) {
 	}
 }
 
-func GetUserByID(c *gin.Context) {
+func GetUserById(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var user models.User
 	err := handlers.GetUserByID(&user, id)
@@ -71,5 +71,16 @@ func DeleteUser(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-    
+
+}
+
+func GetUserPermission(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var user models.User
+	err := handlers.GetUserPermission(&user, id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, user)
+	}
 }

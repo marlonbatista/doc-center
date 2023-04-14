@@ -32,7 +32,7 @@ func CreateUser(user *models.User) (err error) {
 }
 
 func GetUserByID(user *models.User, id string) (err error) {
-	if err = database.DB.Where("id = ?", id).First(user).Error; err != nil {
+	if err = database.DB.First(user, id).Error; err != nil {
 		return err
 	}
 	return nil
@@ -46,5 +46,12 @@ func UpdateUser(user *models.User, id string) (err error) {
 
 func DeleteUser(user *models.User, id string) (err error) {
 	database.DB.Where("id = ?", id).Delete(user)
+	return nil
+}
+
+func GetUserPermission(user *models.User, id string) (err error) {
+	if err = database.DB.InnerJoins("permissions").Where("id = ?", id).First(user).Error; err != nil {
+		return err
+	}
 	return nil
 }

@@ -7,6 +7,5 @@ type Dependent struct {
 	Name          string    `json:"name"`
 	BornDate      time.Time `json:"bornDate"`
 	ResponsableId int64     `json:"responsableId"`
-
-	User User `gorm:"foreignKey:ResponsableId"`
+	Responsable   User      `gorm:"foreignKey:ResponsableId"`
 }
