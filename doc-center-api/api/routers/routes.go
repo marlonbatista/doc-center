@@ -19,7 +19,7 @@ func ConfigRotas() *gin.Engine {
 
 	login := routers.Group("login")
 	{
-		login.POST("", controllers.Login)
+		login.POST("/", controllers.Login)
 	}
 
 	return routers
