@@ -2,10 +2,7 @@ import './styles.css'
 import { useState } from 'react';
 
 function App() {
-
-  const[email, setEmail] = useState("")
-  const[password, setPassword] = useState("")
-
+  
   return (
    <div className="container">
     <div className="container-login">
