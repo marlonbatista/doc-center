@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http from "../common/http-common";
 
 const getAll = () => {
   return http.get("/documents");

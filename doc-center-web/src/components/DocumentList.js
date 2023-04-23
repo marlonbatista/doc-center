@@ -112,6 +112,7 @@ const DocumentsList = (props) => {
         },
       },
     ],
+    // eslint-disable-next-line
     []
   );
 
