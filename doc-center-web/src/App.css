@@ -1,0 +1,23 @@
+.list .action {
+  cursor: pointer;
+}
+
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  background-color: black;
+  
+
+}
