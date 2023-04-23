@@ -8,14 +8,14 @@ import (
 
 func ConfigRotas() *gin.Engine {
 	routers := gin.Default()
-	usuario := routers.Group("usuario")
+	usuarios := routers.Group("usuarios")
 	{
-		usuario.GET("/", controllers.GetAllUsers)
-		usuario.GET("/:id", controllers.GetUserById)
+		usuarios.GET("/", controllers.GetAllUsers)
+		usuarios.GET("/:id", controllers.GetUserById)
 		// usuarios.POST("/", controllers.CreateUser)
 		// usuarios.PUT("/", controllers.UpdateUser)
-		usuario.DELETE("/:id", controllers.DeleteUser)
-		usuario.GET("/:id/permissoes", controllers.GetUserPermission)
+		usuarios.DELETE("/:id", controllers.DeleteUser)
+		usuarios.GET("/:id/permissoes", controllers.GetUserPermission)
 	}
 
 	login := routers.Group("login")
@@ -32,19 +32,19 @@ func ConfigRotas() *gin.Engine {
 		// arquivos.DELETE("/:id", controllers.DeleteFile)
 	}
 
-	permissao := routers.Group("permissao")
+	permissoes := routers.Group("permissoes")
 	{
-		permissao.GET("/", controllers.GetAllPermissions)
-		permissao.GET("/:id", controllers.GetPermissionById)
+		permissoes.GET("/", controllers.GetAllPermissions)
+		permissoes.GET("/:id", controllers.GetPermissionById)
 		// permissao.POST("/", controllers.CreatePermission)
 		// permissao.PUT("/", controllers.UpdatePermission)
 		// permissao.DELETE("/:id", controllers.DeletePermission)
 	}
 
-	dependente := routers.Group("dependente")
+	dependentes := routers.Group("dependentes")
 	{
-		dependente.GET("/", controllers.GetAllDependents)
-		dependente.GET("/:id", controllers.GetDependentById)
+		dependentes.GET("/", controllers.GetAllDependents)
+		dependentes.GET("/:id", controllers.GetDependentById)
 		// dependentes.POST("/", controllers.CreateDependent)
 		// dependentes.PUT("/", controllers.UpdateDependent)
 		// dependentes.DELETE("/:id", controllers.DeleteDependent)
