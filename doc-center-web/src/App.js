@@ -1,49 +1,52 @@
-import './styles.css'
-import { useState } from 'react';
+import React from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+import "./App.css";
+import Footer from "./components/Footer";
+import AddDocument from "./components/AddDocument";
+import Document from "./components/Document";
+import DocumentsList from "./components/DocumentList";
+
 
 function App() {
-  
   return (
-   <div className="container">
-    <div className="container-login">
-      <div className="wrap-login">
-        <form className="login-form">
-          <samp className="login-form-title">Doc center</samp>
-        <div className="wrap-input">
-          <input
-           className={email !== "" ? 'has-val input' : 'input'}
-           type="email"
-           value={email}
-           onChange={(e) => setEmail(e.target.value)}
-          />
-          <span className="focus-input" data-placeholder="Email"></span>
-
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a href="/tutorials" className="navbar-brand">
+          doc-Center
+        </a>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/tutorials"} className="nav-link">
+              Documents
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/add"} className="nav-link">
+              Add
+            </Link>
+          </li>
         </div>
-        <div className="wrap-input">
-          <input 
-          className={password !== "" ? 'has-val input' : "input"}
-           type="password"
-           value={password}
-           onChange={(e) => setPassword(e.target.value)}
-          
-          />
-          <span className="focus-input" data-placeholder="Password"></span>
-        </div>
-
-        <div className="container-form-btn">
-          <button className="login-form-btn">Login</button>
-        </div>
-        <div className="text-center">
-          <span className="txt1">Não possui conta?</span>
-          <a className="txt2" href="#">Criar conta.</a>
-
-        </div>
-        </form>
-
+      </nav>
+      <footer className = 'na'>
+        
+      </footer>
+      <div className="container mt-3">
+        <Switch>
+          <Route exact path={["/", "/tutorials"]} component={DocumentsList} />
+          <Route exact path="/add" component={AddDocument} />
+          <Route path="/tutorials/:id" component={Document} />
+        </Switch>
       </div>
+
+    <Footer/>      
     </div>
-   </div>
   );
+
+
 }
+
 
 export default App;
