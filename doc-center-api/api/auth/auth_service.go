@@ -34,10 +34,11 @@ func (s *AuthService) CreateToken(Email string, Senha string) (string, error) {
 		return "", result.Error
 	}
 
-	var senhaCodificada = services.SHA256Encoder(Senha)
+	user.Password = Senha
+	var senhaCodificada = services.HashPassword(&user)
 
 	if user.Id != 0 {
-		if user.Senha == senhaCodificada {
+		if user.Password == senhaCodificada {
 
 			token := jwt.New(jwt.SigningMethodHS256)
 			claims := token.Claims.(jwt.MapClaims)

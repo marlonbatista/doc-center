@@ -43,8 +43,6 @@ func UpdateUser(user *models.User, id string) (err error) {
 	database.DB.Save(user)
 	return nil
 }
-<<<<<<< HEAD
-=======
 
 func DeleteUser(user *models.User, id string) (err error) {
 	database.DB.Where("id = ?", id).Delete(user)
@@ -57,4 +55,3 @@ func GetUserPermission(user *models.User, id string) (err error) {
 	}
 	return nil
 }
->>>>>>> nicolas_atividades
