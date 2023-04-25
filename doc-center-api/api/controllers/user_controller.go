@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"doc-center-api/api/auth"
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
 	"fmt"
@@ -33,10 +32,21 @@ func CreateUser(c *gin.Context) {
 	}
 }
 
-func GetUserByID(c *gin.Context) {
+func GetUserById(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var user models.User
 	err := handlers.GetUserByID(&user, id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, user)
+	}
+}
+
+func DeleteUser(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var user models.User
+	err := handlers.DeleteUser(&user, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -63,41 +73,55 @@ func UpdateUser(c *gin.Context) {
 func Login(c *gin.Context) {
 }
 
-	
-	authService := auth.AuthService{}
+// imagino que este bloco de codigo pertenca a func Login
+//var authService = auth.AuthService{}
+//
+//var loginData struct {
+//	Username string `json:"Email" binding:"required"`
+//	Password string `json:"Password" binding:"required"`
+//}
+//
+//if erro := c.ShouldBindJSON(&loginData); erro != nil {
+//
+//	c.JSON(http.StatusBadRequest, gin.H{
+//		"error": erro.Error(),
+//	})
+//	return
+//}
+//
+//tokenString, erro := authService.CreateToken(loginData.Username, loginData.Password)
+//
+//if erro != nil {
+//	c.JSON(http.StatusUnauthorized, gin.H{
+//		"error": erro.Error(),
+//	})
+//	return
+//}
+//
+//cookie := http.Cookie{
+//	Name:     "token",
+//	Value:    tokenString,
+//	HttpOnly: true,
+//	Secure:   true,
+//	Path:     "/",
+//}
+//
+//http.SetCookie(c.Writer, &cookie)
+//
+//http.SetCookie(c.Writer, &cookie)
+// comentei ate aqui em cima
 
-	var loginData struct {
-		Username string `json:"Email" binding:"required"`
-		Password string `json:"Password" binding:"required"`
+//func Login(c *gin.Context) {
+//
+//}
+
+func GetUserPermission(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var user models.User
+	err := handlers.GetUserPermission(&user, id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, user)
 	}
-
-	if erro := c.ShouldBindJSON(&loginData); erro != nil {
-
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": erro.Error(),
-		})
-		return
-	}
-
-	tokenString, erro := authService.CreateToken(loginData.Username, loginData.Password)
-
-	if erro != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": erro.Error(),
-		})
-		return
-	}
-
-	cookie := http.Cookie{
-		Name:     "token",
-		Value:    tokenString,
-		HttpOnly: true,
-		Secure:   true,
-		Path:     "/",
-	}
-
-	http.SetCookie(c.Writer, &cookie)
-
-	http.SetCookie(c.Writer, &cookie)
-
 }

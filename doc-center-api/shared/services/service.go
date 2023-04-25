@@ -6,13 +6,13 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func HashPassword(user *models.User) error {
+func HashPassword(user *models.User) string {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 
 	if err != nil {
-		return err
+		return err.Error()
 	}
 	user.Password = string(hashedPassword)
 
-	return nil
+	return user.Password
 }
