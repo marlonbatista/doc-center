@@ -36,7 +36,7 @@ func ConfigRotas() *gin.Engine {
 	{
 		permissoes.GET("/", controllers.GetAllPermissions)
 		permissoes.GET("/:id", controllers.GetPermissionById)
-		// permissao.POST("/", controllers.CreatePermission)
+		permissoes.POST("/", controllers.CreatePermission)
 		// permissao.PUT("/", controllers.UpdatePermission)
 		// permissao.DELETE("/:id", controllers.DeletePermission)
 	}

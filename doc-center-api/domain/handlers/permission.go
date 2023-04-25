@@ -18,3 +18,10 @@ func GetPermissionById(permission *models.Permission, id string) (err error) {
 	}
 	return nil
 }
+
+func CreatePermission(permission *models.Permission) (err error) {
+	if err = database.DB.Create(&permission).Error; err != nil {
+		return err
+	}
+	return nil
+}

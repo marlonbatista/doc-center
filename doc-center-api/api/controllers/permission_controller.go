@@ -28,3 +28,14 @@ func GetPermissionById(c *gin.Context) {
 		c.JSON(http.StatusOK, permission)
 	}
 }
+
+func CreatePermission(c *gin.Context) {
+	var permission models.Permission
+	c.BindJSON(&permission)
+	err := handlers.CreatePermission(&permission)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, permission)
+	}
+}
