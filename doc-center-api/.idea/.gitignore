@@ -8,4 +8,4 @@
 /dataSources.local.xml
 
 # Database connection file
-/infra/database/
+/doc-center-api/infra/database/database.go
