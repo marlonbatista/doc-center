@@ -6,6 +6,3 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-
-# Database connection file
-//doc-center-api/infra/database/database.go
