@@ -55,5 +55,3 @@ func GetUserPermission(user *models.User, id string) (err error) {
 	}
 	return nil
 }
-
-// teste para dar push
