@@ -27,9 +27,9 @@ func ConfigRotas() *gin.Engine {
 	{
 		arquivos.GET("/", controllers.GetAllFiles)
 		arquivos.GET("/:id", controllers.GetFileById)
-		//arquivos.POST("/", controllers.CreateFile)
-		// arquivos.PUT("/", controllers.UpdateFile)
-		// arquivos.DELETE("/:id", controllers.DeleteFile)
+		arquivos.POST("/", controllers.CreateFile)
+		arquivos.PUT("/", controllers.UpdateFile)
+		arquivos.DELETE("/:id", controllers.DeleteFile)
 	}
 
 	permissoes := routers.Group("permissoes")

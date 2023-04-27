@@ -28,3 +28,45 @@ func GetFileById(c *gin.Context) {
 		c.JSON(http.StatusOK, file)
 	}
 }
+
+func CreateFile(c *gin.Context) {
+	var file models.File
+	err := c.BindJSON(&file)
+	if err != nil {
+		return
+	}
+
+	err = handlers.CreateFile(&file)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, file)
+	}
+}
+
+func UpdateFile(c *gin.Context) {
+	var file models.File
+	err := c.BindJSON(&file)
+	if err != nil {
+		return
+	}
+
+	err = handlers.UpdateFile(&file)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, file)
+	}
+}
+
+func DeleteFile(c *gin.Context) {
+	var file models.File
+	id := c.Params.ByName("id")
+
+	err := handlers.DeleteFile(&file, id)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, file)
+	}
+}
