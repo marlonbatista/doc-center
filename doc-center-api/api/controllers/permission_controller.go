@@ -18,10 +18,63 @@ func GetAllPermissions(c *gin.Context) {
 	}
 }
 
-func GetPermissionById(c *gin.Context) {
+func GetOwnerPermission(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var permission []models.Permission
+	err := handlers.GetOwnerPermission(id, &permission)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, permission)
+	}
+}
+
+func GetGuestPermission(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var permission []models.Permission
+	err := handlers.GetGuestPermission(id, &permission)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, permission)
+	}
+}
+
+func CreatePermission(c *gin.Context) {
+	var permission models.Permission
+
+	err := c.BindJSON(&permission)
+	if err != nil {
+		return
+	}
+
+	err = handlers.CreatePermission(&permission)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, permission)
+	}
+}
+
+func UpdatePermission(c *gin.Context) {
+	var permission models.Permission
+	err := c.BindJSON(&permission)
+	if err != nil {
+		return
+	}
+
+	err = handlers.UpdatePermission(&permission)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, permission)
+	}
+}
+
+func DeletePermission(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var permission models.Permission
-	err := handlers.GetPermissionById(&permission, id)
+	err := handlers.DeletePermission(id, &permission)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
