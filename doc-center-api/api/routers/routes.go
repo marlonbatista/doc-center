@@ -11,10 +11,9 @@ func ConfigRotas() *gin.Engine {
 	usuarios := routers.Group("usuarios")
 	{
 		usuarios.GET("/", controllers.GetAllUsers)
-		usuarios.GET("/:id", controllers.GetUserById)
-		// usuarios.POST("/", controllers.CreateUser)
-		// usuarios.PUT("/", controllers.UpdateUser)
-		usuarios.DELETE("/:id", controllers.DeleteUser)
+		usuarios.GET("/:id", controllers.GetUserByID)
+		usuarios.POST("/", controllers.Signup)
+		usuarios.PUT("/", controllers.UpdateUser)
 		usuarios.GET("/:id/permissoes", controllers.GetUserPermission)
 	}
 
