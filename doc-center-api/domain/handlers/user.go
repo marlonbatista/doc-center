@@ -39,15 +39,24 @@ func GetAllUsers(user *[]models.User) (err error) {
 }
 
 func CreateUser(user *models.User) (err error) {
+<<<<<<< HEAD
 	services.HashPassword(&user.Password)
+=======
+	services.HashPassword(user)
+>>>>>>> main
 	if err = database.DB.Create(user).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
+<<<<<<< HEAD
 func GetUserByID(user *models.User, id int) (err error) {
 	if err = models.GetUserById(user, id); err != nil {
+=======
+func GetUserByID(user *models.User, id string) (err error) {
+	if err = database.DB.First(user, id).Error; err != nil {
+>>>>>>> main
 		return err
 	}
 	return nil
@@ -59,6 +68,38 @@ func UpdateUser(user *models.User, id int) (err error) {
 	return nil
 }
 
+<<<<<<< HEAD
 func VerifyPassword(password, hashedPassword string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+=======
+func DeleteUser(user *models.User, id string) (err error) {
+	database.DB.Where("id = ?", id).Delete(user)
+	return nil
+}
+
+func GetUserPermission(user *models.User, id string) (err error) {
+	if err = database.DB.InnerJoins("permissions").Where("id = ?", id).First(user).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func updatePassword(user *models.User, senhaNova string, senhaAntiga string) string {
+	var usuario models.User
+	usuario.Senha = senhaAntiga
+	var senhaCodificada = services.HashPassword(&usuario)
+
+	if senhaCodificada != user.Senha {
+		return "Senhas não conferem"
+	}
+
+	usuario.Senha = senhaNova
+	senhaCodificada = services.HashPassword(&usuario)
+
+	if database.DB.Update("Password", senhaCodificada).Where("id = ?", user.Id).First(user).Error != nil {
+		return "Ocorreu um erro"
+	} else {
+		return "Senha alterada com sucesso"
+	}
+>>>>>>> main
 }
