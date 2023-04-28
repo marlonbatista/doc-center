@@ -3,17 +3,32 @@ package handlers
 import (
 	"fmt"
 
+	// "doc-center-api/api/auth"
+	"doc-center-api/api/utils"
+	// "doc-center-api/api/utils"
 	"doc-center-api/domain/models"
 	"doc-center-api/infra/database"
 	"doc-center-api/shared/services"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
-func CheckEmailAndPasswordUser(email string, password string) (err error) {
-	var user models.User
-	if err = database.DB.Where("email = ? and password = ?", email, password).First(user).Error; err != nil {
-		return err
+func LoginCheck(email string, password string) (string, error) {
+	var err error
+	user := models.User{}
+	// Model(models.User{})
+	if err = database.DB.Where("email=?", email).First(&user).Error; err != nil {
+		return "", err
 	}
-	return nil
+
+	err = VerifyPassword(password, user.Password)
+
+	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+		return "", err
+	}
+
+	token, err := utils.GenerateToken(email)
+	return token, nil
 }
 
 func GetAllUsers(user *[]models.User) (err error) {
@@ -24,26 +39,39 @@ func GetAllUsers(user *[]models.User) (err error) {
 }
 
 func CreateUser(user *models.User) (err error) {
+<<<<<<< HEAD
+	services.HashPassword(&user.Password)
+=======
 	services.HashPassword(user)
+>>>>>>> main
 	if err = database.DB.Create(user).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
+<<<<<<< HEAD
+func GetUserByID(user *models.User, id int) (err error) {
+	if err = models.GetUserById(user, id); err != nil {
+=======
 func GetUserByID(user *models.User, id string) (err error) {
 	if err = database.DB.First(user, id).Error; err != nil {
+>>>>>>> main
 		return err
 	}
 	return nil
 }
 
-func UpdateUser(user *models.User, id string) (err error) {
+func UpdateUser(user *models.User, id int) (err error) {
 	fmt.Print(user)
 	database.DB.Save(user)
 	return nil
 }
 
+<<<<<<< HEAD
+func VerifyPassword(password, hashedPassword string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+=======
 func DeleteUser(user *models.User, id string) (err error) {
 	database.DB.Where("id = ?", id).Delete(user)
 	return nil
@@ -73,4 +101,5 @@ func updatePassword(user *models.User, senhaNova string, senhaAntiga string) str
 	} else {
 		return "Senha alterada com sucesso"
 	}
+>>>>>>> main
 }
