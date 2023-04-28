@@ -14,7 +14,7 @@ type User struct {
 	CompanyName string `json:"companyName"`
 	TradingName string `json:"tradingName"`
 	Email       string `json:"email"`
-	Password    string `json:"password"`
+	Senha       string `json:"password"`
 }
 
 func (b *User) User() string {

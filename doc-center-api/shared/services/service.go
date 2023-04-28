@@ -7,12 +7,12 @@ import (
 )
 
 func HashPassword(user *models.User) string {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Senha), bcrypt.DefaultCost)
 
 	if err != nil {
 		return err.Error()
 	}
-	user.Password = string(hashedPassword)
+	user.Senha = string(hashedPassword)
 
-	return user.Password
+	return user.Senha
 }

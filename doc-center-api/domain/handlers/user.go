@@ -58,14 +58,14 @@ func GetUserPermission(user *models.User, id string) (err error) {
 
 func updatePassword(user *models.User, senhaNova string, senhaAntiga string) string {
 	var usuario models.User
-	usuario.Password = senhaAntiga
+	usuario.Senha = senhaAntiga
 	var senhaCodificada = services.HashPassword(&usuario)
 
-	if senhaCodificada != user.Password {
+	if senhaCodificada != user.Senha {
 		return "Senhas não conferem"
 	}
 
-	usuario.Password = senhaNova
+	usuario.Senha = senhaNova
 	senhaCodificada = services.HashPassword(&usuario)
 
 	if database.DB.Update("Password", senhaCodificada).Where("id = ?", user.Id).First(user).Error != nil {
