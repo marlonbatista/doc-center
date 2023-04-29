@@ -11,7 +11,6 @@ type Permission struct {
 	GuestId   int64     `json:"guestUser"`
 	Period    time.Time `json:"period"`
 	Permanent bool      `json:"permanent"`
-
 	File      File `gorm:"foreignKey:FileId"`
 	OwnerUser User `gorm:"foreignKey:OwnerId"`
 	GuestUser User `gorm:"foreignKey:GuestId"`

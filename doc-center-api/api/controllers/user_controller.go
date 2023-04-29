@@ -3,7 +3,6 @@ package controllers
 import (
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
-	// "doc-center-api/shared/services"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -77,12 +76,10 @@ func Login(c *gin.Context) {
 		return
 	}
 	token, err := handlers.LoginCheck(login.Email, login.Password)
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "The e-mail or password is not correct"})
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{"token": token})
 
 }

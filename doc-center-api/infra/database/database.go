@@ -42,11 +42,9 @@ func CloseConn() error {
 	if err != nil {
 		return err
 	}
-
 	err = config.Close()
 	if err != nil {
 		return err
 	}
-
 	return nil
 }

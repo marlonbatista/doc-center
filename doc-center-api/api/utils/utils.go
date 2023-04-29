@@ -13,8 +13,7 @@ type Claims struct {
 	UserEmail string
 }
 
-var currentTime = time.Now()
-var TOKEN_EXP = currentTime.Add(time.Hour * 3).Unix() // 3 hours
+var TOKEN_EXP = time.Now().Add(time.Hour * 3).Unix() // 3 hours
 
 const SECRECT_KEY = "secrectkey123"
 
@@ -30,7 +29,6 @@ func GenerateToken(email string) (string, error) {
 }
 
 func TokenIsValid(c *gin.Context) bool {
-
 	tokenStr := getTokenFromRequest(c)
 	if tokenStr == "" {
 		return false;
@@ -46,7 +44,6 @@ func TokenIsValid(c *gin.Context) bool {
 
 func getTokenFromRequest(c *gin.Context) string {
 	bearerToken := c.Request.Header.Get("Authorization")
-
 	splitToken := strings.Split(bearerToken, " ")
 	if len(splitToken) == 2 {
 		return splitToken[1]
