@@ -3,7 +3,6 @@ package routes
 import (
 	"doc-center-api/api/controllers"
 	"doc-center-api/api/middleware"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -31,7 +30,6 @@ func ConfigRotas() *gin.Engine{
 		files.PUT("/", controllers.UpdateFile)
 		files.DELETE("/:id", controllers.DeleteFile)
 	}
-
 	permissions := routers.Group("permissions")
 	{
 		permissions.GET("/", controllers.GetAllPermissions)
@@ -41,7 +39,6 @@ func ConfigRotas() *gin.Engine{
 		permissions.PUT("/", controllers.UpdatePermission)
 		permissions.DELETE("/:id", controllers.DeletePermission)
 	}
-
 	dependents := routers.Group("dependents")
 	{
 		dependents.GET("/", controllers.GetAllDependents)

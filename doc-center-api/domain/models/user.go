@@ -9,14 +9,12 @@ type User struct {
 	Name          string `json:"name"`
 	NaturalPerson bool   `json:"naturalPerson"`
 	CPF           string `json:"cpf"`
-	// CPF           string    `json:"cpf" gorm:"check:check_cpf, naturalPerson = 1"`
-	BornDate string `json:"bornDate"`
-	CNPJ     string `json:"cnpj"`
-	// CNPJ          string    `json:"cnpj" gorm:"check:check_cnpj, naturalPerson = 1"`
-	CompanyName string `json:"companyName"`
-	TradingName string `json:"tradingName"`
-	Email       string `json:"email"`
-	Password       string `json:"password"`
+	BornDate      string `json:"bornDate"`
+	CNPJ          string `json:"cnpj"`
+	CompanyName   string `json:"companyName"`
+	TradingName   string `json:"tradingName"`
+	Email         string `json:"email"`
+	Password      string `json:"password"`
 }
 
 func (b *User) User() string {

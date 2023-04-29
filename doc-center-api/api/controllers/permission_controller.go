@@ -4,7 +4,6 @@ import (
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -42,12 +41,10 @@ func GetGuestPermission(c *gin.Context) {
 
 func CreatePermission(c *gin.Context) {
 	var permission models.Permission
-
 	err := c.BindJSON(&permission)
 	if err != nil {
 		return
 	}
-
 	err = handlers.CreatePermission(&permission)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -62,7 +59,6 @@ func UpdatePermission(c *gin.Context) {
 	if err != nil {
 		return
 	}
-
 	err = handlers.UpdatePermission(&permission)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)

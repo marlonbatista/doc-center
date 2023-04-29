@@ -4,7 +4,6 @@ import (
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
