@@ -11,4 +11,6 @@ func HashPassword(password *string) error {
 		return err
 	}
 	*password = string(hashedPassword)
+	return nil
 }
+
