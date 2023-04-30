@@ -13,4 +13,3 @@ func HashPassword(password *string) error {
 	*password = string(hashedPassword)
 	return nil
 }
-

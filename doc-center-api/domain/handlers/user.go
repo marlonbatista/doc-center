@@ -1,11 +1,12 @@
 package handlers
 
 import (
-	"fmt"
 	"doc-center-api/api/utils"
 	"doc-center-api/domain/models"
 	"doc-center-api/infra/database"
 	"doc-center-api/shared/services"
+	"fmt"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -62,18 +63,21 @@ func GetUserPermission(user *models.User, id string) (err error) {
 	return nil
 }
 
-func updatePassword(user *models.User, senhaNova string, senhaAntiga string) string {
-	var usuario models.User
-	usuario.Senha = senhaAntiga
-	var senhaCodificada = services.HashPassword(&usuario)
-	if senhaCodificada != user.Senha {
-		return "Senhas não conferem"
+func UpdatePassword(user *models.User, newPassword string, oldPassword string) bool {
+	var voidUser models.User
+	voidUser.Password = oldPassword
+	services.HashPassword(&voidUser.Password)
+
+	if voidUser.Password != user.Password {
+		return false
 	}
-	usuario.Senha = senhaNova
-	senhaCodificada = services.HashPassword(&usuario)
-	if database.DB.Update("Password", senhaCodificada).Where("id = ?", user.Id).First(user).Error != nil {
-		return "Ocorreu um erro"
+
+	voidUser.Password = newPassword
+	services.HashPassword(&voidUser.Password)
+
+	if database.DB.Update("Password", voidUser.Password).Where("id = ?", user.Id).First(user).Error != nil {
+		return false
 	} else {
-		return "Senha alterada com sucesso"
+		return true
 	}
 }
