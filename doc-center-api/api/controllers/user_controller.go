@@ -39,12 +39,11 @@ func GetUserByID(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		panic(err)
 	}
-	var user models.User
-	err = handlers.GetUserByID(&user, id)
+	us, err := handlers.GetUserByID(id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, us)
 	}
 }
 
@@ -67,10 +66,10 @@ func UpdateUser(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		panic(err)
 	}
-	err = handlers.GetUserByID(&user, id)
-	if err != nil {
-		c.JSON(http.StatusNotFound, user)
-	}
+	//err = handlers.GetUserByID(&user, id)
+	//if err != nil {
+	//	c.JSON(http.StatusNotFound, user)
+	//}
 	c.BindJSON(&user)
 	err = handlers.UpdateUser(&user, id)
 	if err != nil {

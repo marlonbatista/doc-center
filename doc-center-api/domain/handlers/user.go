@@ -38,11 +38,11 @@ func CreateUser(user *models.User) (err error) {
 	return nil
 }
 
-func GetUserByID(user *models.User, id int) (err error) {
+func GetUserByID(id int) (user *models.User, err error) {
 	if err = models.GetUserById(user, id); err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return user, nil
 }
 
 func GetUserByName(user *[]models.User, name string) (err error) {
