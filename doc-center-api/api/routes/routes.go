@@ -6,10 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ConfigRotas() *gin.Engine{
+func ConfigRotas() *gin.Engine {
 
 	routers := gin.Default()
-	
+
 	// Rotas livres
 	routers.POST("/login", controllers.Login)
 	routers.POST("/signup", controllers.Signup)
@@ -19,8 +19,9 @@ func ConfigRotas() *gin.Engine{
 	{
 		users.GET("/", controllers.GetAllUsers)
 		users.GET("/:id", controllers.GetUserByID)
-		users.PUT("/", controllers.UpdateUser)
 		users.GET("/:id/permissions", controllers.GetUserPermission)
+		users.GET("name/:name", controllers.GetUserByName)
+		users.PUT("/", controllers.UpdateUser)
 	}
 	files := routers.Group("files")
 	{

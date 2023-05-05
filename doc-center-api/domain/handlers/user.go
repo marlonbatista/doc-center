@@ -6,7 +6,6 @@ import (
 	"doc-center-api/infra/database"
 	"doc-center-api/shared/services"
 	"fmt"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -41,6 +40,16 @@ func CreateUser(user *models.User) (err error) {
 
 func GetUserByID(user *models.User, id int) (err error) {
 	if err = models.GetUserById(user, id); err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetUserByName(user *[]models.User, name string) (err error) {
+	if err = database.DB.Where("name LIKE ?", "%"+name+"%").
+		Limit(2).
+		Offset(0).
+		Find(&user).Error; err != nil {
 		return err
 	}
 	return nil
