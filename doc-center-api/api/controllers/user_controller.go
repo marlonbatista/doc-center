@@ -48,6 +48,17 @@ func GetUserByID(c *gin.Context) {
 	}
 }
 
+func GetUserByName(c *gin.Context) {
+	name := c.Params.ByName("name")
+	var user []models.User
+	err := handlers.GetUserByName(&user, name)
+	if err != nil || len(user) == 0 {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, user)
+	}
+}
+
 func UpdateUser(c *gin.Context) {
 	var user models.User
 	idParam := c.Params.ByName("id")
