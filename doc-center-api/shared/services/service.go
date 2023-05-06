@@ -1,18 +1,15 @@
 package services
 
 import (
-	"doc-center-api/domain/models"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
-func HashPassword(user *models.User) error {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+func HashPassword(password *string) error {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(*password), bcrypt.DefaultCost)
 
 	if err != nil {
 		return err
 	}
-	user.Password = string(hashedPassword)
-
+	*password = string(hashedPassword)
 	return nil
 }

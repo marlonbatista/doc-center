@@ -20,8 +20,8 @@ func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
 		Host:     "localhost",
 		Port:     3306,
-		User:     "root",
-		Password: "125678",
+		User:     "",
+		Password: "",
 		DBName:   "DocCenterDB",
 	}
 	return &dbConfig
@@ -42,11 +42,9 @@ func CloseConn() error {
 	if err != nil {
 		return err
 	}
-
 	err = config.Close()
 	if err != nil {
 		return err
 	}
-
 	return nil
 }

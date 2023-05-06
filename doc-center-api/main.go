@@ -1,12 +1,11 @@
 package main
 
 import (
-	"doc-center-api/api/routers"
+	"doc-center-api/api/routes"
 	"doc-center-api/domain/models"
 	"doc-center-api/infra/database"
 	"fmt"
-
-	// "github.com/go-sql-driver/mysql"
+	"os"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -22,11 +21,15 @@ func main() {
 	}
 
 	defer database.CloseConn()
-	database.DB.AutoMigrate(&models.User{})
+	database.DB.AutoMigrate(&models.PermissionType{}, &models.Permission{}, &models.User{},
+		&models.Dependent{}, &models.File{})
 
-	router := routers.ConfigRotas()
+	port := os.Getenv("PORT")
 
-	//Inicializa o framewrok de rotas
-	router.Run()
+	if port == "" {
+		port = "8080"
+	}
+	router := routes.ConfigRotas()
+	router.Run(":" + port)
 
 }

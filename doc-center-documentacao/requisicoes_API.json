@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "d6cb36e9-5391-442c-86eb-7485c0f2ea3e",
+		"name": "doc-center",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "GetAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserByName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/name/Balduino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"name",
+								"Balduino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"meu_email@email.com\",\r\n    \"password\": \"minha_senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "singup",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Meu Nome\",\r\n    \"naturalPerson\": 1,\r\n    \"cpf\": \"Meu_cpf\",\r\n    \"bornDate\": \"01/01/2000\",\r\n    \"cnpj\": \"\",\r\n    \"companyName\": \"\",\r\n    \"tradingName\": \"\",\r\n    \"email\": \"meu_email@email.com\",\r\n    \"password\": \"minha_senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "files",
+			"item": [
+				{
+					"name": "GetAllFiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/files",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFileById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/files/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"files",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateFile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 0,\r\n        \"description\": \"nome_arquivo\",\r\n        \"file\": null,\r\n        \"userId\": 1,\r\n        \"User\": {\r\n            \"id\": 0,\r\n            \"name\": \"\",\r\n            \"naturalPerson\": false,\r\n            \"cpf\": \"\",\r\n            \"bornDate\": \"0001-01-01T00:00:00Z\",\r\n            \"cnpj\": \"\",\r\n            \"companyName\": \"\",\r\n            \"tradingName\": \"\",\r\n            \"email\": \"\",\r\n            \"password\": \"\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/files",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateFile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 3,\r\n        \"description\": \"teste3\",\r\n        \"file\": null,\r\n        \"userId\": 2,\r\n        \"User\": {\r\n            \"id\": 0,\r\n            \"name\": \"\",\r\n            \"naturalPerson\": false,\r\n            \"cpf\": \"\",\r\n            \"bornDate\": \"0001-01-01T00:00:00Z\",\r\n            \"cnpj\": \"\",\r\n            \"companyName\": \"\",\r\n            \"tradingName\": \"\",\r\n            \"email\": \"\",\r\n            \"password\": \"\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/files",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/files/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"files",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dependents",
+			"item": [
+				{
+					"name": "GetAllDependents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dependents",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dependents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDependentById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dependents/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dependents",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permissions",
+			"item": [
+				{
+					"name": "GetAllPermissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/permissions",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOwnerPermission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/permissions/owner/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions",
+								"owner",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGuestPermission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/permissions/guest/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions",
+								"guest",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreatePermission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":0,\r\n    \"file\":1,\r\n    \"ownerUser\":2,\r\n    \"guestUser\":3,\r\n    \"period\":\"2023-05-10 00:00:00\",\r\n    \"permanent\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/permissions",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePermission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 11,\r\n        \"file\": 1,\r\n        \"ownerUser\": 2,\r\n        \"guestUser\": 3,\r\n        \"period\": \"0001-01-01T00:00:00Z\",\r\n        \"permanent\": false,\r\n        \"File\": {\r\n            \"id\": 0,\r\n            \"description\": \"\",\r\n            \"file\": null,\r\n            \"userId\": 0,\r\n            \"User\": {\r\n                \"id\": 0,\r\n                \"name\": \"\",\r\n                \"naturalPerson\": false,\r\n                \"cpf\": \"\",\r\n                \"bornDate\": \"0001-01-01T00:00:00Z\",\r\n                \"cnpj\": \"\",\r\n                \"companyName\": \"\",\r\n                \"tradingName\": \"\",\r\n                \"email\": \"\",\r\n                \"password\": \"\"\r\n            }\r\n        },\r\n        \"OwnerUser\": {\r\n            \"id\": 0,\r\n            \"name\": \"\",\r\n            \"naturalPerson\": false,\r\n            \"cpf\": \"\",\r\n            \"bornDate\": \"0001-01-01T00:00:00Z\",\r\n            \"cnpj\": \"\",\r\n            \"companyName\": \"\",\r\n            \"tradingName\": \"\",\r\n            \"email\": \"\",\r\n            \"password\": \"\"\r\n        },\r\n        \"GuestUser\": {\r\n            \"id\": 0,\r\n            \"name\": \"\",\r\n            \"naturalPerson\": false,\r\n            \"cpf\": \"\",\r\n            \"bornDate\": \"0001-01-01T00:00:00Z\",\r\n            \"cnpj\": \"\",\r\n            \"companyName\": \"\",\r\n            \"tradingName\": \"\",\r\n            \"email\": \"\",\r\n            \"password\": \"\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/permissions",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePermission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/permissions/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissions",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
