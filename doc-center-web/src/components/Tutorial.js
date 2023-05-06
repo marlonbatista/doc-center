@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import DocumentDataService from "../services/DocumentService";
+import TutorialDataService from "../services/TutorialService";
 
-const Document = props => {
-  const initialDocumentState = {
+const Tutorial = props => {
+  const initialTutorialState = {
     id: null,
     title: "",
     description: "",
     published: false
   };
-  const [currentDocument, setCurrentDocument] = useState(initialDocumentState);
+  const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [message, setMessage] = useState("");
 
-  const getDocument = id => {
-    DocumentDataService.get(id)
+  const getTutorial = id => {
+    TutorialDataService.get(id)
       .then(response => {
-        setCurrentDocument(response.data);
+        setCurrentTutorial(response.data);
         console.log(response.data);
       })
       .catch(e => {
@@ -23,25 +23,25 @@ const Document = props => {
   };
 
   useEffect(() => {
-    getDocument(props.match.params.id);
+    getTutorial(props.match.params.id);
   }, [props.match.params.id]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setCurrentDocument({ ...currentDocument, [name]: value });
+    setCurrentTutorial({ ...currentTutorial, [name]: value });
   };
 
   const updatePublished = status => {
     var data = {
-      id: currentDocument.id,
-      title: currentDocument.title,
-      description: currentDocument.description,
+      id: currentTutorial.id,
+      title: currentTutorial.title,
+      description: currentTutorial.description,
       published: status
     };
 
-    DocumentDataService.update(currentDocument.id, data)
+    TutorialDataService.update(currentTutorial.id, data)
       .then(response => {
-        setCurrentDocument({ ...currentDocument, published: status });
+        setCurrentTutorial({ ...currentTutorial, published: status });
         console.log(response.data);
         setMessage("The status was updated successfully!");
       })
@@ -50,8 +50,8 @@ const Document = props => {
       });
   };
 
-  const updateDocument = () => {
-    DocumentDataService.update(currentDocument.id, currentDocument)
+  const updateTutorial = () => {
+    TutorialDataService.update(currentTutorial.id, currentTutorial)
       .then(response => {
         console.log(response.data);
         setMessage("The tutorial was updated successfully!");
@@ -61,8 +61,8 @@ const Document = props => {
       });
   };
 
-  const deleteDocument = () => {
-    DocumentDataService.remove(currentDocument.id)
+  const deleteTutorial = () => {
+    TutorialDataService.remove(currentTutorial.id)
       .then(response => {
         console.log(response.data);
         props.history.push("/tutorials");
@@ -74,9 +74,9 @@ const Document = props => {
 
   return (
     <div>
-      {currentDocument ? (
+      {currentTutorial ? (
         <div className="edit-form">
-          <h4>Document</h4>
+          <h4>Tutorial</h4>
           <form>
             <div className="form-group">
               <label htmlFor="title">Title</label>
@@ -85,7 +85,7 @@ const Document = props => {
                 className="form-control"
                 id="title"
                 name="title"
-                value={currentDocument.title}
+                value={currentTutorial.title}
                 onChange={handleInputChange}
               />
             </div>
@@ -96,7 +96,7 @@ const Document = props => {
                 className="form-control"
                 id="description"
                 name="description"
-                value={currentDocument.description}
+                value={currentTutorial.description}
                 onChange={handleInputChange}
               />
             </div>
@@ -105,11 +105,11 @@ const Document = props => {
               <label>
                 <strong>Status:</strong>
               </label>
-              {currentDocument.published ? "Published" : "Pending"}
+              {currentTutorial.published ? "Published" : "Pending"}
             </div>
           </form>
 
-          {currentDocument.published ? (
+          {currentTutorial.published ? (
             <button
               className="badge badge-primary mr-2"
               onClick={() => updatePublished(false)}
@@ -125,14 +125,14 @@ const Document = props => {
             </button>
           )}
 
-          <button className="badge badge-danger mr-2" onClick={deleteDocument}>
+          <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
 
           <button
             type="submit"
             className="badge badge-success"
-            onClick={updateDocument}
+            onClick={updateTutorial}
           >
             Update
           </button>
@@ -141,11 +141,11 @@ const Document = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Document...</p>
+          <p>Please click on a Tutorial...</p>
         </div>
       )}
     </div>
   );
 };
 
-export default Document;
+export default Tutorial;

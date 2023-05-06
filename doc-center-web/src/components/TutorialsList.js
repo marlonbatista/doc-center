@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import DocumentDataService from "../services/DocumentService";
-import { useTable } from "react-table"
+import TutorialDataService from "../services/TutorialService";
+import { useTable } from "react-table";
 
-const DocumentsList = (props) => {
-  const [tutorials, setDocuments] = useState([]);
+const TutorialsList = (props) => {
+  const [tutorials, setTutorials] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const tutorialsRef = useRef();
 
   tutorialsRef.current = tutorials;
 
   useEffect(() => {
-    retrieveDocuments();
+    retrieveTutorials();
   }, []);
 
   const onChangeSearchTitle = (e) => {
@@ -18,10 +18,10 @@ const DocumentsList = (props) => {
     setSearchTitle(searchTitle);
   };
 
-  const retrieveDocuments = () => {
-    DocumentDataService.getAll()
+  const retrieveTutorials = () => {
+    TutorialDataService.getAll()
       .then((response) => {
-        setDocuments(response.data);
+        setTutorials(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -29,11 +29,11 @@ const DocumentsList = (props) => {
   };
 
   const refreshList = () => {
-    retrieveDocuments();
+    retrieveTutorials();
   };
 
-  const removeAllDocuments = () => {
-    DocumentDataService.removeAll()
+  const removeAllTutorials = () => {
+    TutorialDataService.removeAll()
       .then((response) => {
         console.log(response.data);
         refreshList();
@@ -44,32 +44,32 @@ const DocumentsList = (props) => {
   };
 
   const findByTitle = () => {
-    DocumentDataService.findByTitle(searchTitle)
+    TutorialDataService.findByTitle(searchTitle)
       .then((response) => {
-        setDocuments(response.data);
+        setTutorials(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  const openDocument = (rowIndex) => {
+  const openTutorial = (rowIndex) => {
     const id = tutorialsRef.current[rowIndex].id;
 
     props.history.push("/tutorials/" + id);
   };
 
-  const deleteDocument = (rowIndex) => {
+  const deleteTutorial = (rowIndex) => {
     const id = tutorialsRef.current[rowIndex].id;
 
-    DocumentDataService.remove(id)
+    TutorialDataService.remove(id)
       .then((response) => {
         props.history.push("/tutorials");
 
-        let newDocuments = [...tutorialsRef.current];
-        newDocuments.splice(rowIndex, 1);
+        let newTutorials = [...tutorialsRef.current];
+        newTutorials.splice(rowIndex, 1);
 
-        setDocuments(newDocuments);
+        setTutorials(newTutorials);
       })
       .catch((e) => {
         console.log(e);
@@ -100,11 +100,11 @@ const DocumentsList = (props) => {
           const rowIdx = props.row.id;
           return (
             <div>
-              <span onClick={() => openDocument(rowIdx)}>
+              <span onClick={() => openTutorial(rowIdx)}>
                 <i className="far fa-edit action mr-2"></i>
               </span>
 
-              <span onClick={() => deleteDocument(rowIdx)}>
+              <span onClick={() => deleteTutorial(rowIdx)}>
                 <i className="fas fa-trash action"></i>
               </span>
             </div>
@@ -112,7 +112,6 @@ const DocumentsList = (props) => {
         },
       },
     ],
-    // eslint-disable-next-line
     []
   );
 
@@ -183,7 +182,7 @@ const DocumentsList = (props) => {
       </div>
 
       <div className="col-md-8">
-        <button className="btn btn-sm btn-danger" onClick={removeAllDocuments}>
+        <button className="btn btn-sm btn-danger" onClick={removeAllTutorials}>
           Remove All
         </button>
       </div>
@@ -191,4 +190,4 @@ const DocumentsList = (props) => {
   );
 };
 
-export default DocumentsList;
+export default TutorialsList;

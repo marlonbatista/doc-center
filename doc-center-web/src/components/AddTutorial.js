@@ -1,30 +1,30 @@
 import React, { useState } from "react";
-import DocumentDataService from "../services/DocumentService";
+import TutorialDataService from "../services/TutorialService";
 
-const AddDocument = () => {
-  const initialDocumentState = {
+const AddTutorial = () => {
+  const initialTutorialState = {
     id: null,
     title: "",
     description: "",
     published: false
   };
-  const [tutorial, setDocument] = useState(initialDocumentState);
+  const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setDocument({ ...tutorial, [name]: value });
+    setTutorial({ ...tutorial, [name]: value });
   };
 
-  const saveDocument = () => {
+  const saveTutorial = () => {
     var data = {
       title: tutorial.title,
       description: tutorial.description
     };
 
-    DocumentDataService.create(data)
+    TutorialDataService.create(data)
       .then(response => {
-        setDocument({
+        setTutorial({
           id: response.data.id,
           title: response.data.title,
           description: response.data.description,
@@ -38,8 +38,8 @@ const AddDocument = () => {
       });
   };
 
-  const newDocument = () => {
-    setDocument(initialDocumentState);
+  const newTutorial = () => {
+    setTutorial(initialTutorialState);
     setSubmitted(false);
   };
 
@@ -48,7 +48,7 @@ const AddDocument = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newDocument}>
+          <button className="btn btn-success" onClick={newTutorial}>
             Add
           </button>
         </div>
@@ -68,7 +68,7 @@ const AddDocument = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description" >Description</label>
+            <label htmlFor="description">Description</label>
             <input
               type="text"
               className="form-control"
@@ -80,7 +80,7 @@ const AddDocument = () => {
             />
           </div>
 
-          <button onClick={saveDocument} className="btn btn-success">
+          <button onClick={saveTutorial} className="btn btn-success">
             Submit
           </button>
         </div>
@@ -89,4 +89,4 @@ const AddDocument = () => {
   );
 };
 
-export default AddDocument;
+export default AddTutorial;
