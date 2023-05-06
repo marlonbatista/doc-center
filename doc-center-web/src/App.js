@@ -14,12 +14,12 @@ function App() {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/tutorials" className="navbar-brand">
-          bezKoder
+          Doc-center
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/tutorials"} className="nav-link">
-              Tutorials
+              Documents
             </Link>
           </li>
           <li className="nav-item">
