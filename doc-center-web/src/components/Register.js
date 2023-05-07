@@ -51,6 +51,7 @@ const Register = () => {
   const checkBtn = useRef();
 
   const [username, setUsername] = useState("");
+  const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
@@ -60,6 +61,10 @@ const Register = () => {
     const username = e.target.value;
     setUsername(username);
   };
+
+  function onChangeCpf(event) {
+    setCpf(event.target.value);
+  }
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -123,6 +128,21 @@ const Register = () => {
                   validations={[required, vusername]}
                 />
               </div>
+
+              <div className="form-group">
+          
+              <label htmlFor="cpf">CPF</label>
+              <Input
+              type="text"
+              className="form-control"
+              name="cpf"
+              value={cpf}
+              onChange={onChangeCpf}
+              validations={[required]}
+                />
+              </div>
+
+              
 
               <div className="form-group">
                 <label htmlFor="email">Email</label>
