@@ -51,20 +51,23 @@ const Register = () => {
   const checkBtn = useRef();
 
   const [username, setUsername] = useState("");
-  const [cpf, setCpf] = useState('');
+  const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPerson, setIsPerson] = useState(true);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
   };
 
-  function onChangeCpf(event) {
-    setCpf(event.target.value);
-  }
+  const onChangeCpf = (e) => {
+    const cpf = e.target.value;
+    setCpf(cpf);
+  };
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -76,6 +79,7 @@ const Register = () => {
     setPassword(password);
   };
 
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -85,7 +89,7 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
+      AuthService.register(username, cpf, email, password, isPerson).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -129,7 +133,8 @@ const Register = () => {
                 />
               </div>
 
-              <div className="form-group">
+
+               <div className="form-group">
           
               <label htmlFor="cpf">CPF</label>
               <Input
@@ -143,7 +148,6 @@ const Register = () => {
               </div>
 
               
-
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <Input
@@ -167,12 +171,47 @@ const Register = () => {
                   validations={[required, vpassword]}
                 />
               </div>
+              <div className="form-group">
+              <label htmlFor="isPerson">Tipo de pessoa </label>
+            <div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="isPessoaFisica"
+                  id="isPessoaFisica-fisica"
+                  value="true"
+                  checked={isPerson}
+                  onChange={() => setIsPerson(true)}
+                />
+                <label className="form-check-label" htmlFor="isPessoaFisica-fisica">
+                  Física
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="isPessoaFisica"
+                  id="isPessoaFisica-juridica"
+                  value="false"
+                  checked={!isPerson}
+                  onChange={() => setIsPerson(false)}
+                />
+                <label className="form-check-label" htmlFor="isPessoaFisica-juridica">
+                  Jurídica
+                </label>
+              </div>
+            </div>
+            </div>
+
 
               <div className="form-group">
                 <button className="btn btn-primary btn-block">Sign Up</button>
               </div>
             </div>
           )}
+
 
           {message && (
             <div className="form-group">
