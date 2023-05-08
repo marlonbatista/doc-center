@@ -60,18 +60,17 @@ func GetUserByName(c *gin.Context) {
 }
 
 func UpdateUser(c *gin.Context) {
-	var user models.User
 	idParam := c.Params.ByName("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
-		c.AbortWithStatus(http.StatusBadRequest)
-		panic(err)
+		c.JSON(http.StatusBadRequest, gin.H{"User id not found: ": idParam})
+		return
 	}
-	err = handlers.GetUserByID(&user, id)
-	if err != nil {
-		c.JSON(http.StatusNotFound, user)
+	var user models.User
+	err = nil
+	if err = c.ShouldBind(&user); err  != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"The submitted object is not valid": err})
 	}
-	c.BindJSON(&user)
 	err = handlers.UpdateUser(&user, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
