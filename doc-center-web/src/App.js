@@ -120,7 +120,7 @@ const App = () => {
           
         )}
       </nav>
-      <footer className = 'na'>
+      <footer className = 'navbar navbar-expand navbar-dark bg-dark'>
         
       </footer>
       <div className="container mt-3">

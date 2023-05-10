@@ -3,12 +3,18 @@ package routes
 import (
 	"doc-center-api/api/controllers"
 	"doc-center-api/api/middleware"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func ConfigRotas() *gin.Engine {
 
 	routers := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8081"}
+	routers.Use(cors.New(config))
 
 	// Rotas livres
 	routers.POST("/login", controllers.Login)

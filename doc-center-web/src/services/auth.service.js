@@ -14,6 +14,9 @@ const register = (username,isPerson ,cpf ,borndate, email, password) => {
 };
 
 const login = (username, password) => {
+  const axios = require('axios');
+  const API_URL = "http://localhost:8080/api/";
+
   return axios
     .post(API_URL + "signin", {
       username,
@@ -26,7 +29,6 @@ const login = (username, password) => {
       return response.data;
     });
 };
-
 const logout = () => {
   localStorage.removeItem("user");
 };
