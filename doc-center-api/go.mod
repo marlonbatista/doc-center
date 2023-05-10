@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/gin-contrib/cors v1.4.0
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.6
 )
