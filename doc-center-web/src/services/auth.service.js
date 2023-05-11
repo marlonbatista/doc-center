@@ -1,6 +1,7 @@
 import axios from "axios"
-
-const API_URL = "http://localhost:8080/"
+import Env from "../env"
+// const API_URL = "http://localhost:8080/"
+const  API_URL = Env().URL_API
 
 const register = (username, isPerson, cpf, borndate, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -14,6 +15,7 @@ const register = (username, isPerson, cpf, borndate, email, password) => {
 }
 
 const login = (email, password) => {
+  console.log("Rota ", API_URL)
   return axios
     .post(API_URL + "login", {
       email: email,
@@ -22,9 +24,10 @@ const login = (email, password) => {
     .then((response) => {
       if (response.data.token) {
         console.log(response.data)
-        const token = JSON.stringify(response.data.token)
-        console.log("Token depois :", token)
+        const data = response.data
+        const {token, idUser } = data;
         localStorage.setItem("token", token)
+        localStorage.setItem("IdUser", idUser)
       }
       return response.data
     })
