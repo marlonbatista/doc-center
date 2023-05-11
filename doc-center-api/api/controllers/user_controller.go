@@ -68,7 +68,7 @@ func UpdateUser(c *gin.Context) {
 	}
 	var user models.User
 	err = nil
-	if err = c.ShouldBind(&user); err  != nil {
+	if err = c.ShouldBind(&user); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"The submitted object is not valid": err})
 	}
 	err = handlers.UpdateUser(&user, id)
@@ -85,12 +85,15 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	token, err := handlers.LoginCheck(login.Email, login.Password)
+	loginReturn, err := handlers.LoginCheck(login.Email, login.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "The e-mail or password is not correct"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"token": token})
+	c.JSON(http.StatusOK, gin.H{
+		"token":  loginReturn.Token,
+		"idUser": loginReturn.IdUser,
+	})
 
 }
 
