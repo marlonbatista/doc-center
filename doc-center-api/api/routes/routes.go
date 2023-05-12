@@ -52,9 +52,9 @@ func ConfigRotas() *gin.Engine {
 	{
 		dependents.GET("/", controllers.GetAllDependents)
 		dependents.GET("/:id", controllers.GetDependentById)
-		// dependents.POST("/", controllers.CreateDependent)
-		// dependents.PUT("/", controllers.UpdateDependent)
-		// dependents.DELETE("/:id", controllers.DeleteDependent)
+		dependents.POST("/", controllers.CreateDependent)
+		dependents.PUT("/", controllers.UpdateDependent)
+		dependents.DELETE("/:id", controllers.DeleteDependent)
 	}
 	return routers
 }
