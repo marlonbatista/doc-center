@@ -3,13 +3,21 @@ package routes
 import (
 	"doc-center-api/api/controllers"
 	"doc-center-api/api/middleware"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func ConfigRotas() *gin.Engine {
 
 	routers := gin.Default()
-
+	routers.Use(cors.New((cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
+		AllowHeaders:     []string{"Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	})))
 	// Rotas livres
 	routers.POST("/login", controllers.Login)
 	routers.POST("/signup", controllers.Signup)

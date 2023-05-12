@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Route, Link, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -20,6 +20,7 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Footer from "./components/Footer";
 import EventBus from "./common/EventBus";
+
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);

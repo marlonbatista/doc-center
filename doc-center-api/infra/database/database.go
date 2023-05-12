@@ -20,8 +20,8 @@ func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
 		Host:     "localhost",
 		Port:     3306,
-		User:     "",
-		Password: "",
+		User:     "root",
+		Password: "125678",
 		DBName:   "DocCenterDB",
 	}
 	return &dbConfig

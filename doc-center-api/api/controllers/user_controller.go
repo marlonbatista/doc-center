@@ -59,18 +59,25 @@ func GetUserByName(c *gin.Context) {
 }
 
 func UpdateUser(c *gin.Context) {
-	var user models.User
 	idParam := c.Params.ByName("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
-		c.AbortWithStatus(http.StatusBadRequest)
-		panic(err)
+		c.JSON(http.StatusBadRequest, gin.H{"User id not found: ": idParam})
+		return
 	}
+<<<<<<< HEAD
 	//err = handlers.GetUserByID(&user, id)
 	//if err != nil {
 	//	c.JSON(http.StatusNotFound, user)
 	//}
 	c.BindJSON(&user)
+=======
+	var user models.User
+	err = nil
+	if err = c.ShouldBind(&user); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"The submitted object is not valid": err})
+	}
+>>>>>>> main
 	err = handlers.UpdateUser(&user, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -85,12 +92,15 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	token, err := handlers.LoginCheck(login.Email, login.Password)
+	loginReturn, err := handlers.LoginCheck(login.Email, login.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "The e-mail or password is not correct"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"token": token})
+	c.JSON(http.StatusOK, gin.H{
+		"token":  loginReturn.Token,
+		"idUser": loginReturn.IdUser,
+	})
 
 }
 
