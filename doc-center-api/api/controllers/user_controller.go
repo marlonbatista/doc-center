@@ -39,12 +39,11 @@ func GetUserByID(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		panic(err)
 	}
-	var user models.User
-	err = handlers.GetUserByID(&user, id)
+	us, err := handlers.GetUserByID(id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, us)
 	}
 }
 
@@ -66,11 +65,13 @@ func UpdateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"User id not found: ": idParam})
 		return
 	}
+
 	var user models.User
 	err = nil
 	if err = c.ShouldBind(&user); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"The submitted object is not valid": err})
 	}
+
 	err = handlers.UpdateUser(&user, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
