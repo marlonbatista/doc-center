@@ -18,7 +18,7 @@ const login = (email, password) => {
   console.log("Rota ", API_URL)
   return axios
     .post(API_URL + "login", {
-      email: email,
+      email,
       password
     })
     .then((response) => {
