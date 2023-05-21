@@ -1,54 +1,54 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Container, TextField, Button } from '@mui/material';
+import { Typography, Container, TextField, Button, Avatar } from '@mui/material';
 import { Box } from '@mui/system';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
- 
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
     if (event.target.value.length < 3 || event.target.value.length > 50) {
-        setUsernameError('Username must be between 3 and 50 characters');
-      } else {
-        setUsernameError('');
-      }
+      setUsernameError('Username must be between 3 and 50 characters');
+    } else {
+      setUsernameError('');
+    }
   };
 
-  
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    if (event.target.value.length < 6 || event.target.value.length > 12) {
-        setPasswordError('Password must be between 3 and 12 characters');
-      } else {
-        setPasswordError('');
-      }
+    if (event.target.value.length < 6 || event.target.value.length > 30) {
+      setPasswordError('Password must be between 3 and 30 characters');
+    } else {
+      setPasswordError('');
     }
+  };
 
   const handleLoginClick = () => {
     // Verificar se os dados estão válidos antes de enviar para o backend
     if (username.length >= 3 && username.length <= 50 && password.length >= 6) {
-      fetch('/api/login', {
+      let email = username;
+      fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username,
-          password
-        })
+          email,
+          password,
+        }),
       })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+        .then((response) => response.json())
+        .then((data) => localStorage.setItem('token', data.token))
+        .catch((error) => console.error(error));
     }
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-     
       <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Container maxWidth="sm">
           <Box
@@ -59,45 +59,52 @@ const Login = () => {
             noValidate
             autoComplete="off"
           >
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+              <Avatar sx={{ width: 80, height: 80, bgcolor: 'primary.main' }}>
+                <PersonIcon sx={{ fontSize: 48 }} />
+              </Avatar>
+            </Box>
             <TextField
-  fullWidth
-  id="username"
-  label="Username"
-  variant="outlined"
-  size="small"
-  value={username}
-  onChange={handleUsernameChange}
-  error={Boolean(usernameError)}
-  helperText={usernameError}
-/>
-<TextField
-  fullWidth
-  id="password"
-  label="Password"
-  variant="outlined"
-  size="small"
-  type="password"
-  value={password}
-  onChange={handlePasswordChange}
-  error={Boolean(passwordError)}
-  helperText={passwordError}
-/>
+              fullWidth
+              id="username"
+              label="Username"
+              variant="outlined"
+              size="small"
+              value={username}
+              onChange={handleUsernameChange}
+              error={Boolean(usernameError)}
+              helperText={usernameError}
+            />
+            <TextField
+              fullWidth
+              id="password"
+              label="Password"
+              variant="outlined"
+              size="small"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
+            />
 
-            <Button variant="contained" size="large" onClick={handleLoginClick}>
-              Login
-            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <Button variant="contained" size="large" onClick={handleLoginClick}>
+                Login
+              </Button>
+            </Box>
           </Box>
         </Container>
       </Box>
 
       <footer style={{ marginTop: 'auto' }}>
         <Typography variant="body2" color="text.secondary" align="center">
-          © {new Date().getFullYear()}, ADS Fatec
-        </Typography>
-      </footer>
-      
-    </div>
-  );
-};
-
-export default Login;
+          © {new Date().getFullYear
+          }, ADS Fatec
+          </Typography>
+          </footer>
+          </div>
+          );
+          };
+          
+          export default Login;
