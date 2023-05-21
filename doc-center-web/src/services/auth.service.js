@@ -1,7 +1,7 @@
 import axios from "axios"
 import Env from "../env"
-// const API_URL = "http://localhost:8080/"
-const  API_URL = Env().URL_API
+ const API_URL = "http://localhost:8080/"
+//const  API_URL = Env().URL_API
 
 const register = (username, isPerson, cpf, borndate, email, password) => {
   return axios.post(API_URL + "signup", {
