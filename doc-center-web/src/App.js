@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 
 //import AddDocument from "./components/AddDocument";
 //import Document from "./components/Document";
@@ -18,7 +20,6 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-import Footer from "./components/Footer";
 import EventBus from "./common/EventBus";
 
 
@@ -54,75 +55,36 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={""} className="navbar-brand">
-          Doc-Center
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
+       <AppBar position="static">
+       <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            sx={{ mr: 2 }}
+          >
 
-          {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )}
+          </IconButton>
 
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )}
-
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )}
-         </div>
-
-        {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
-          </div>
-          
-        )}
-      </nav>
-      <footer className = 'navbar navbar-expand navbar-dark bg-dark'>
-        
-      </footer>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "inherit", textDecoration: "none" }}>
+          <Link to={"/home"} style={{ color: "white" }}>
+            Doc Center
+          </Link>
+          </Typography>
+       
+          <Typography variant="h6" component="div" sx={{ color: "inherit", display: "flex", justifyContent: "space-between" }}>
+          <Link to={"/login"}  style={{ color: "white" }}>
+            Login
+          </Link>
+          <Link to={"/register"}  style={{ color: "white", marginLeft: "16px"}}>
+            SignUp
+          </Link>
+          </Typography>
+       
+        </Toolbar>
+      </AppBar>
+      
+      
+   
       <div className="container mt-3">
         <Routes>
           <Route path="/" element={<Home/>} />
@@ -138,9 +100,7 @@ const App = () => {
           <Route path="/tutorials/:id" element={<Document/>} /> */}
         </Routes>
 
-      
       </div>
-      <Footer/>  
     </div>
   );
 };
