@@ -22,6 +22,8 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import EventBus from "./common/EventBus";
 
+import File from './pages/File'
+
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -95,6 +97,7 @@ const App = () => {
           <Route path="/user" element={<BoardUser/>} />
           <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} />
+          <Route path="/editFile" element={<File/>} />
          {/* <Route path="/add" element={<AddDocument/>} />          
           <Route path="/tutorials" element={<DocumentsList/>} />
           <Route path="/tutorials/:id" element={<Document/>} /> */}

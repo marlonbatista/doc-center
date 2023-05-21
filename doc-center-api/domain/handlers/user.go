@@ -9,18 +9,29 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func LoginCheck(email string, password string) (string, error) {
+type loginReturn struct {
+	Token  string `json:token`
+	IdUser int    `json:idUser`
+}
+
+func LoginCheck(email string, password string) (loginReturn, error) {
 	var err error
 	user := models.User{}
 	if err = database.DB.Where("email=?", email).First(&user).Error; err != nil {
-		return "", err
+		return loginReturn{}, err
 	}
 	err = VerifyPassword(password, user.Password)
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
-		return "", err
+		return loginReturn{}, err
 	}
 	token, err := utils.GenerateToken(email)
-	return token, nil
+	if err != nil {
+		return loginReturn{}, err
+	}
+	return loginReturn{
+		Token:  token,
+		IdUser: int(user.Id),
+	}, nil
 }
 
 func GetAllUsers(user *[]models.User) (err error) {
@@ -38,11 +49,11 @@ func CreateUser(user *models.User) (err error) {
 	return nil
 }
 
-func GetUserByID(user *models.User, id int) (err error) {
+func GetUserByID(id int) (user *models.User, err error) {
 	if err = models.GetUserById(user, id); err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return user, nil
 }
 
 func GetUserByName(user *[]models.User, name string) (err error) {
