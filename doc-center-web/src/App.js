@@ -21,6 +21,8 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import EventBus from "./common/EventBus";
+import RouteControl from "./utils/RouteControl";
+
 
 import File from './pages/File'
 
@@ -89,20 +91,21 @@ const App = () => {
    
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-          <Route path="/mod" element={<BoardModerator/>} />
-          <Route path="/admin" element={<BoardAdmin/>} />
-          <Route path="/editFile" element={<File/>} />
-         {/* <Route path="/add" element={<AddDocument/>} />          
-          <Route path="/tutorials" element={<DocumentsList/>} />
-          <Route path="/tutorials/:id" element={<Document/>} /> */}
-        </Routes>
+          <Route element={<RouteControl.PrivateRoutes />}>
+            <Route path="/" element={<Home/>} />
+            <Route path="/home" element={<Home/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/user" element={<BoardUser/>} />
+            <Route path="/mod" element={<BoardModerator/>} />
+            <Route path="/admin" element={<BoardAdmin/>} />
+            <Route path="/editFile" element={<File/>} />
+          </Route>
 
+          <Route element={<RouteControl.PublicRoutes />}>
+            <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
+          </Route>
+        </Routes>
       </div>
     </div>
   );
