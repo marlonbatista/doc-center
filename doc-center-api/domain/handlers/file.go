@@ -5,11 +5,12 @@ import (
 	"doc-center-api/infra/database"
 )
 
-func GetAllFiles(arquivo *[]models.File) (err error) {
-	if err = database.DB.Find(arquivo).Error; err != nil {
-		return err
+func GetAllFiles(userId string) (file []models.File, err error) {
+	var files []models.File
+	if err = database.DB.Where("user_id = ?", userId).Find(&files).Error; err != nil {
+		return files, err
 	}
-	return nil
+	return files, nil
 }
 
 func GetFileByID(file *models.File, id string) (err error) {

@@ -33,7 +33,7 @@ func ConfigRotas() *gin.Engine {
 	}
 	files := routers.Group("files")
 	{
-		files.GET("/", controllers.GetAllFiles)
+		files.GET("/user/:userId", controllers.GetAllFiles)
 		files.GET("/:id", controllers.GetFileById)
 		files.POST("/", controllers.CreateFile)
 		files.PUT("/", controllers.UpdateFile)
