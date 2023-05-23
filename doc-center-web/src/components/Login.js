@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import { TextField } from '@mui/material';
 
 import AuthService from "../services/auth.service";
 
@@ -94,6 +92,7 @@ const Login = () => {
         <Form onSubmit={handleLogin} ref={form}>
             <TextField
               fullWidth
+              autoFocus
               id="username"
               name="username"
               label="E-mail"
@@ -170,20 +169,13 @@ const Login = () => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
+      <footer style={{ marginTop: 'auto' }}>
+        <div variant="body2" color="text.secondary" align="center">
+          © 2023, ADS Fatec
+        </div>
+      </footer>
     </div>
   );
 };
 
-
-      <footer style={{ marginTop: 'auto' }}>
-        <Typography variant="body2" color="text.secondary" align="center">
-          © {new Date().getFullYear
-          }, ADS Fatec
-          </Typography>
-          </footer>
-          </div>
-          );
-          };
-          
-          export default Login;
-
+export default Login;
