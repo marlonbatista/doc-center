@@ -18,6 +18,7 @@ const required = (value) => {
   }
 };
 
+
 const Login = () => {
   let navigate = useNavigate();
 
@@ -77,6 +78,7 @@ const Login = () => {
       );
     } else {
       setLoading(false);
+
     }
   };
 
@@ -172,4 +174,16 @@ const Login = () => {
   );
 };
 
-export default Login;
+
+      <footer style={{ marginTop: 'auto' }}>
+        <Typography variant="body2" color="text.secondary" align="center">
+          © {new Date().getFullYear
+          }, ADS Fatec
+          </Typography>
+          </footer>
+          </div>
+          );
+          };
+          
+          export default Login;
+

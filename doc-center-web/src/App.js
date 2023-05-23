@@ -21,8 +21,10 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import EventBus from "./common/EventBus";
+
 import RouteControl from "./utils/RouteControl";
 
+import JuridicPerson from "./components/JuridicPerson";
 
 import File from './pages/File'
 
@@ -127,6 +129,7 @@ const App = () => {
           
         )}
       </nav>
+
       
       
    
@@ -145,7 +148,11 @@ const App = () => {
           <Route element={<RouteControl.PublicRoutes />}>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
+            <Route path="/JuridicPerson" element={<JuridicPerson/>} />
           </Route>
+          {/* <Route path="/add" element={<AddDocument/>} />          
+          <Route path="/tutorials" element={<DocumentsList/>} />
+          <Route path="/tutorials/:id" element={<Document/>} /> */}
         </Routes>
       </div>
     </div>
