@@ -34,11 +34,11 @@ const login = (email, password) => {
 }
 
 const logout = () => {
-  localStorage.removeItem("user")
+  localStorage.removeItem("IdUser")
 }
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"))
+  return JSON.parse(localStorage.getItem("IdUser"))
 }
 
 const AuthService = {

@@ -1,7 +1,7 @@
-label {
+/* label {
   display: block;
   margin-top: 10px;
-}
+} */
 
 .card-container.card {
   max-width: 350px !important;
@@ -41,4 +41,14 @@ label {
   
   
 
+}
+
+#logo {
+  height: 50px;
+  max-width: 100%;
+  margin-right: 10px;
+}
+
+.white {
+  color: white !important;
 }

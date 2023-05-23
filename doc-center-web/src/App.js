@@ -37,8 +37,8 @@ const App = () => {
 
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -59,40 +59,81 @@ const App = () => {
 
   return (
     <div>
-       <AppBar position="static">
-       <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            sx={{ mr: 2 }}
-          >
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <Link to={"/"} className="navbar-brand">
+        <img id="logo" src="logo-doc_center.png" /> 
+          Doc-Center
+        </Link>
+        <div className="navbar-nav mr-auto">
+          {/* <li className="nav-item">
+            <Link to={"/home"} className="nav-link white">
+              Home
+            </Link>
+          </li> */}
 
-          </IconButton>
+          {showModeratorBoard && (
+            <li className="nav-item">
+              <Link to={"/mod"} className="nav-link">
+                Moderator Board
+              </Link>
+            </li>
+          )}
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "inherit", textDecoration: "none" }}>
-          <Link to={"/home"} style={{ color: "white" }}>
-            Doc Center
-          </Link>
-          </Typography>
-       
-          <Typography variant="h6" component="div" sx={{ color: "inherit", display: "flex", justifyContent: "space-between" }}>
-          <Link to={"/login"}  style={{ color: "white" }}>
-            Login
-          </Link>
-          <Link to={"/register"}  style={{ color: "white", marginLeft: "16px"}}>
-            SignUp
-          </Link>
-          </Typography>
-       
-        </Toolbar>
-      </AppBar>
+          {showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/admin"} className="nav-link">
+                Admin Board
+              </Link>
+            </li>
+          )}
+
+          {/* {currentUser && (
+            <li className="nav-item">
+              <Link to={"/user"} className="nav-link">
+                User
+              </Link>
+            </li>
+          )} */}
+         </div>
+
+        {currentUser ? (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/profile"} className="nav-link">
+                {/* {currentUser.username} */}
+                User
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={logOut}>
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link white">
+                Login
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link white">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+          
+        )}
+      </nav>
       
       
    
       <div className="container mt-3">
         <Routes>
           <Route element={<RouteControl.PrivateRoutes />}>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<File/>} />
             <Route path="/home" element={<Home/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/user" element={<BoardUser/>} />
