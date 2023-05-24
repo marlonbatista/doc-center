@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import { TextField } from '@mui/material';
 
 import AuthService from "../services/auth.service";
 
@@ -16,6 +16,7 @@ const required = (value) => {
   }
 };
 
+
 const Login = () => {
   let navigate = useNavigate();
 
@@ -26,15 +27,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+    if (event.target.value.length < 3 || event.target.value.length > 50) {
+      setUsernameError('Username must be between 3 and 50 characters');
+    } else {
+      setUsernameError('');
+    }
   };
 
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value.length < 6 || event.target.value.length > 30) {
+      setPasswordError('Password must be between 3 and 30 characters');
+    } else {
+      setPasswordError('');
+    }
   };
 
   const handleLogin = (e) => {
@@ -48,7 +59,7 @@ const Login = () => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
-          navigate("/profile");
+          navigate("/");
           window.location.reload();
         },
         (error) => {
@@ -65,6 +76,7 @@ const Login = () => {
       );
     } else {
       setLoading(false);
+
     }
   };
 
@@ -78,7 +90,43 @@ const Login = () => {
         />
 
         <Form onSubmit={handleLogin} ref={form}>
-          <div className="form-group">
+            <TextField
+              fullWidth
+              autoFocus
+              id="username"
+              name="username"
+              label="E-mail"
+              variant="outlined"
+              margin="dense"
+              value={username}
+              onChange={handleUsernameChange}
+              error={Boolean(usernameError)}
+              helperText={usernameError}
+            />
+            
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              variant="outlined"
+              margin="dense"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              error={Boolean(passwordError)}
+              helperText={passwordError}
+            />
+            
+            <br></br><br></br>
+            <button className="btn btn-primary btn-block" disabled={loading}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Login</span>
+            </button>
+
+          {/* <div className="form-group">
             <label htmlFor="username">Username</label>
             <Input
               type="text"
@@ -100,16 +148,16 @@ const Login = () => {
               onChange={onChangePassword}
               validations={[required]}
             />
-          </div>
+          </div> */}
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <button className="btn btn-primary btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
               <span>Login</span>
             </button>
-          </div>
+          </div> */}
 
           {message && (
             <div className="form-group">
@@ -121,6 +169,11 @@ const Login = () => {
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
+      <footer style={{ marginTop: 'auto' }}>
+        <div variant="body2" color="text.secondary" align="center">
+          © 2023, ADS Fatec
+        </div>
+      </footer>
     </div>
   );
 };

@@ -3,8 +3,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+
+
 
 const required = (value) => {
   if (!value) {
@@ -59,6 +61,7 @@ const Register = () => {
   const [message, setMessage] = useState("");
 
 
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -79,33 +82,41 @@ const Register = () => {
     setPassword(password);
   };
 
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
-
+  
     setMessage("");
     setSuccessful(false);
-
+  
     form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, cpf, email, password, isPerson).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+  
+  
+    if (isPerson !== true) {
+      // Redirecionar para o formulário jurídico
+      navigate('../JuridicPerson');
+    } else {
+      if (checkBtn.current.context._errors.length === 0) {
+        AuthService.register(username, cpf, email, password, isPerson).then(
+          (response) => {
+            setMessage(response.data.message);
+            setSuccessful(true);
+          },
+          (error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+  
+            setMessage(resMessage);
+            setSuccessful(false);
+          }
+        );
+      }
     }
   };
 
