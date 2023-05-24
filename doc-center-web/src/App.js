@@ -20,6 +20,7 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Footer from "./components/Footer";
 import EventBus from "./common/EventBus";
+import Permision from "./components/Permission";
 
 import File from './pages/File'
 
@@ -136,6 +137,7 @@ const App = () => {
           <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} />
           <Route path="/editFile" element={<File/>} />
+          <Route path="/permission" element={<Permision/>} />
          {/* <Route path="/add" element={<AddDocument/>} />          
           <Route path="/tutorials" element={<DocumentsList/>} />
           <Route path="/tutorials/:id" element={<Document/>} /> */}
