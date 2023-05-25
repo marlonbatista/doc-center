@@ -1,7 +1,7 @@
 import axios from "axios"
 import Env from "../env"
-// const API_URL = "http://localhost:8080/"
-const  API_URL = Env().URL_API
+ const API_URL = "http://localhost:8080/"
+//const  API_URL = Env().URL_API
 
 const register = (username, isPerson, cpf, borndate, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -34,11 +34,11 @@ const login = (email, password) => {
 }
 
 const logout = () => {
-  localStorage.removeItem("user")
+  localStorage.removeItem("IdUser")
 }
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"))
+  return JSON.parse(localStorage.getItem("IdUser"))
 }
 
 const AuthService = {

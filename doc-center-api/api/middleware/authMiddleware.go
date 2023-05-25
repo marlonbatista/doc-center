@@ -1,10 +1,11 @@
 package middleware
 
 import (
+	"doc-center-api/api/utils"
 	"fmt"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
-	"doc-center-api/api/utils"
 )
 
 func Authenticate() gin.HandlerFunc {

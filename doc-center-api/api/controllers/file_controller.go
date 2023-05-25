@@ -3,14 +3,15 @@ package controllers
 import (
 	"doc-center-api/domain/handlers"
 	"doc-center-api/domain/models"
-	"net/http"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func GetAllFiles(c *gin.Context) {
+	id := c.Params.ByName("userId")
 	var arquivo []models.File
-	err := handlers.GetAllFiles(&arquivo)
-	if err != nil {
+	arquivo, err := handlers.GetAllFiles(id)
+	if err != nil || len(arquivo) == 0 {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, arquivo)

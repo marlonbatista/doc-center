@@ -185,13 +185,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/files",
+							"raw": "localhost:8080/files/user/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"files"
+								"files",
+								"user",
+								"1"
 							]
 						}
 					},
