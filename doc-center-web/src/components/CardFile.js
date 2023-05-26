@@ -5,10 +5,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
-import './style.css';
- 
-
-
 const CardFile = (props) => {
         return (
             <Card sx={{ maxWidth: '95%' }}>

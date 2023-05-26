@@ -1,2 +1,4 @@
 doc-center-api/.vscode/launch.json
 doc-center-web/.vscode/launch.json
+doc-center-web/package-lock.json
+doc-center-web/yarn.lock
