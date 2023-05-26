@@ -155,7 +155,7 @@ const App = () => {
             <Route path="/mod" element={<BoardModerator/>} />
             <Route path="/admin" element={<BoardAdmin/>} />
             {/* <Route path="/editFile" element={<File/>} /> */}
-          </Route>
+          {/* <Route/> */}
 
           <Route element={<RouteControl.PublicRoutes />}>
             <Route path="/login" element={<Login/>} />
