@@ -16,15 +16,7 @@ const documents = (state = initialState, action) => {
   switch (action.type) {
     case  ADD_DOC:
       return [
-        ...state,
-        {
-          Id: state.reduce((maxId, doc) => Math.max(doc.Id, maxId), -1) + 1,
-          description: action.description,
-          number: action.number,
-          dataOfIssue: action.fataOfIssue,
-          file: action.file,
-          userId: action.userId
-        }
+        ...state, action.payload     
       ]
 
     case DELETE_DOC:

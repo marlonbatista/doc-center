@@ -36,7 +36,7 @@ const AddFile = () => {
   const handleNumber = (e) => setNumber(e.target.value)
 
   const handleDataOfIssue = (e) => {
-    setDataOfIssue(e.format());
+    setDataOfIssue(e.format("YYYY-MM-DD"));
   }
 
   const handleFile = (e) => setfile(e.target.value)
@@ -55,8 +55,7 @@ const AddFile = () => {
   }
 
   const handleAdd = () => {
-    handleUserId()
-    if (description && number && dataOfIssue && userId) {
+    if (description && number && dataOfIssue) {
       dispatch(
         addDOC({
           Id: docsAmount + 1,
@@ -64,16 +63,16 @@ const AddFile = () => {
           Number: number,
           DataOfIssue: dataOfIssue,
           File: file,
-          UserId: userId
+          UserId: localStorage.getItem("UserId")
         })
       )
     }
-    dispatch(addDOC(file))
     setOpen(false)
   }
 
   return (
     <div>
+      {handleUserId}
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
         <Fab
           sx={{ float: "right", marginRight: "45px" }}
