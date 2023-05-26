@@ -1,8 +1,8 @@
 export default function authHeader() {
   let header = new Headers();
-  header = header.append('Access-Control-Allow-Origin', '*');
-  header = header.append('Accept', 'application/json');
-  const token = JSON.parse(localStorage.getItem('token'));
+  header.append('Access-Control-Allow-Origin', '*');
+  header.append('Content-Type', 'application/json');
+  const token = localStorage.getItem('token');
   if (token !== '' && token !== null) {
     header = header.append('Authorization',`Bearer ${token}`)
   }
