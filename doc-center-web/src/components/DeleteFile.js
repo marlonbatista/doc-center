@@ -33,16 +33,19 @@ const DeleteFile = (props,{ DeleteDOC  }) => {
   };
 
   const handleClose = () => {
-    dispatch(deleteDOC(file));
     setOpen(false);
   };
 
+  const handleDelete = () => {
+    dispatch(deleteDOC(file));
+    setOpen(false);
+  };
 
   return (
     
     <div>
       <Button variant="contained" size="small" color="error" onClick={handleClickOpen}>
-        ApagarComponent
+        Apagar
       </Button>
       <Dialog
         fullScreen={fullScreen}
@@ -62,7 +65,7 @@ const DeleteFile = (props,{ DeleteDOC  }) => {
           <Button variant="contained" size="small" color="error" autoFocus onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="contained" size="small" color="success" onClick={handleClose} autoFocus>
+          <Button variant="contained" size="small" color="success" onClick={handleDelete} autoFocus>
             Confirmar
           </Button>
         </DialogActions>

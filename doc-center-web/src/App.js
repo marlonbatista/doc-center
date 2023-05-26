@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-//import AddDocument from "./components/AddDocument";
+import AddDocument from "./components/AddDocument";
 //import Document from "./components/Document";
 //import DocumentsList from "./components/DocumentList";
 
@@ -146,6 +146,7 @@ const App = () => {
           <Route path="/admin" element={<BoardAdmin/>} />
           <Route path="/editFile" element={<File/>} />
           <Route path="/permission" element={<Permision/>} />
+          <Route path="/add" element={<AddDocument/>} /> 
          {/* <Route path="/add" element={<AddDocument/>} />          
           <Route element={<RouteControl.PrivateRoutes />}>
             <Route path="/" element={<File/>} />
