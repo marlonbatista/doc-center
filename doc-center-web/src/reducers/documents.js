@@ -1,64 +1,45 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import FileService from "../../services/file.service"
+import FileService from "../services/file.service"
+import {ADD_DOC, DELETE_DOC, UPDATE_DOC} from './actions/actions';
+import { initialState } from './state';
 
-export const fetchDocuments = createAsyncThunk("edifFile", async () => {
-  const userId = localStorage.getItem("UserId")
-  const responde = FileService.getAllDocument(userId)
-  const documents = Response.json()
-  return documents
-});
+// export const fetchDocuments = createAsyncThunk("edifFile", async () => {
+//   const userId = localStorage.getItem("UserId")
+//   const responde = FileService.getAllDocument(userId)
+//   const documents = Response.json()
+//   return documents
+// })
 
-const initialState = [
-  {
-    Id: 1,
-    Description: "RG",
-    Number: "29.717.366-2",
-    DataOfIssue: "2002-10-03",
-    File: "1k2oisk2k",
-    UserId: 2
-  },
-  {
-    Id: 2,
-    Description: "CPF",
-    Number: "339.859.110-88",
-    DataOfIssue: "2000-11-15",
-    File: "1k2oisk2k",
-    UserId: 2
-  }
-];
+
 
 const documents = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_DOC":
+    case  ADD_DOC:
       return [
-        ...state,
-        {
-          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-          description: action.description,
-          number: action.number,
-          dataOfIssue: action.fataOfIssue,
-          file: action.file,
-          userId: action.userId
-        }
-      ];
+        ...state, action.payload     
+      ]
 
-    case "DELETE_DOC":
-        return state.filter(doc => doc.id !== action.id);
+    case DELETE_DOC:
+      return state.filter((doc) => doc.Id !== action.payload.Id)
 
-    case "UPD_DOC":
-      return state.map(doc => doc.id === action.id ? 
-        {   ...doc, 
-            description: action.description,
-            number: action.number,
-            dataOfIssue: action.fataOfIssue,
-            file: action.file
-        }: doc );
+    case UPDATE_DOC:
+      return state.map((doc) =>
+        doc.id === action.id
+          ? {
+              ...doc,
+              description: action.description,
+              number: action.number,
+              dataOfIssue: action.fataOfIssue,
+              file: action.file
+            }
+          : doc
+      )
     default:
-        return state;
+      return state
   }
 }
 
-export default documents;
+export default documents
 // const documentsSlice = createSlice({
 //     name: "documents",
 //     initialState:{

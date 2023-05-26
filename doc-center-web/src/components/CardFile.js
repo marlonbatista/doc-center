@@ -4,6 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import DeleteFile from './DeleteFile';
+import { connect } from "react-redux"
 
 const CardFile = (props) => {
         return (
@@ -26,7 +28,7 @@ const CardFile = (props) => {
               <Stack direction="row" spacing={5}>
                 <Button variant="contained" size="small" color="warning">Editar</Button>
                 <Button variant="contained" size="small" color="primary">Anexos</Button>
-                <Button variant="contained" size="small" color="error">Apagar</Button>
+                <DeleteFile file={props} />
                 <Button variant="contained" size="small" color="success">Imprimir</Button>
                 </Stack>
               </CardActions>
@@ -34,4 +36,7 @@ const CardFile = (props) => {
           );
 }
 
-export default CardFile;
+const mapStateToProps = state => ({ documents: state.documents});
+
+
+export default connect(mapStateToProps)(CardFile)
