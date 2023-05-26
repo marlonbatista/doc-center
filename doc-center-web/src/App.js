@@ -68,11 +68,6 @@ const App = () => {
           Doc-Center
         </Link>
         <div className="navbar-nav mr-auto">
-          {/* <li className="nav-item">
-            <Link to={"/home"} className="nav-link white">
-              Home
-            </Link>
-          </li> */}
 
           {showModeratorBoard && (
             <li className="nav-item">
@@ -89,21 +84,12 @@ const App = () => {
               </Link>
             </li>
           )}
-
-          {/* {currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )} */}
          </div>
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {/* {currentUser.username} */}
                 User
               </Link>
             </li>
@@ -131,23 +117,8 @@ const App = () => {
         )}
       </nav>
 
-      
-      
-   
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-          <Route path="/mod" element={<BoardModerator/>} />
-          <Route path="/admin" element={<BoardAdmin/>} />
-          <Route path="/editFile" element={<File/>} />
-          <Route path="/permission" element={<Permision/>} />
-          <Route path="/add" element={<AddDocument/>} /> 
-         {/* <Route path="/add" element={<AddDocument/>} />          
           <Route element={<RouteControl.PrivateRoutes />}>
             <Route path="/" element={<File/>} />
             <Route path="/home" element={<Home/>} />
@@ -155,17 +126,14 @@ const App = () => {
             <Route path="/user" element={<BoardUser/>} />
             <Route path="/mod" element={<BoardModerator/>} />
             <Route path="/admin" element={<BoardAdmin/>} />
-            {/* <Route path="/editFile" element={<File/>} /> */}
-          {/* <Route/> */}
+            <Route path="/editFile" element={<File/>} />  
+          </Route>
 
           <Route element={<RouteControl.PublicRoutes />}>
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/JuridicPerson" element={<JuridicPerson/>} />
           </Route>
-          {/* <Route path="/add" element={<AddDocument/>} />          
-          <Route path="/tutorials" element={<DocumentsList/>} />
-          <Route path="/tutorials/:id" element={<Document/>} /> */}
         </Routes>
       </div>
     </div>
