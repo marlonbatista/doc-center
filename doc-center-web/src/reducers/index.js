@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import documents from './actions/documents'
+import documents from './documents'
 
 const rootReducer = combineReducers({
     documents

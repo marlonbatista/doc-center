@@ -12,7 +12,7 @@ const File = ({documents})  => (
             Description={file.Description}
             Number={file.Number}
             DataOfIssue={file.DataOfIssue}
-            IdElement={file.Id} />
+            Id={file.Id} />
           <br />
         </>
       );
