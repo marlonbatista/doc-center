@@ -1,47 +1,26 @@
-import CardFile from "../components/CardFile/CardFile"
+import CardFile from "../components/CardFile";
+import { connect } from "react-redux";
 
-const FILES = [
-  {
-    Id: 1,
-    Description: "RG",
-    Number: "29.717.366-2",
-    DataOfIssue: "2002-10-03",
-    File: "1k2oisk2k",
-    UserId: 2
-  },
-  {
-    Id: 2,
-    Description: "CPF",
-    Number: "339.859.110-88",
-    DataOfIssue: "2000-11-15",
-    File: "1k2oisk2k",
-    UserId: 2
-  }
-]
+const File = ({documents})  => (
+  <>
+  {console.log("Documents", documents)}
+    <h1>Meus Documentos</h1>
+    {documents.map((file) => {
+      return (
+        <>
+          <CardFile
+            Description={file.Description}
+            Number={file.Number}
+            DataOfIssue={file.DataOfIssue}
+            IdElement={file.Id} />
+          <br />
+        </>
+      );
+    })}
+  </>
+)
 
-const File = () => {
-  const documentList = []
-  return (
-    <>
-      <h1>Meus Documentos</h1>
-      {FILES.map((file) => {
-        return (
-          <>
-            <CardFile
-              Description={file.Description}
-              Number={file.Number}
-              DataOfIssue={file.DataOfIssue}
-            />
-            <br />
-          </>
-        )
-      })}
-    </>
-  )
-}
+const mapStateToProps = state => ({ documents: state.documents});
 
-const getAllDocuments = () => {
-  return
-}
 
-export default File
+export default connect(mapStateToProps)(File)
